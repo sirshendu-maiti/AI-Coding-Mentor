@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AI Coding Mentor</string>
+    <!--
+        GOOGLE SIGN-IN SETUP:
+        Replace the value below with your actual Web Client ID from Firebase Console.
+        Steps:
+        1. Go to Firebase Console > Authentication > Sign-in method > Google
+        2. Enable Google sign-in provider
+        3. Click "Web SDK configuration" to find your Web client ID
+        4. It looks like: 418342184988-xxxxxxxxxx.apps.googleusercontent.com
+        5. Also add your SHA-1 fingerprint in Firebase Console > Project Settings > Your apps
+
+        If you don't set this up:
+        - Google Sign-In button will be hidden (not shown to users)
+        - Email/Password and Guest login will still work perfectly
+    -->
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "418342184988",
+    "project_id": "aicodingmentor-f1077",
+    "storage_bucket": "aicodingmentor-f1077.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418342184988:android:62f632e2c0ea0fbb92d7d9",
+        "android_client_info": {
+          "package_name": "com.euphoria.aimentor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6Yy78Nv7QTaqAqHOiuRYAM8z9zUl1d7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        "chats": {
+          ".indexOn": ["timestamp"]
+        },
+        "history": {
+          ".indexOn": ["timestamp"]
+        }
+      }
+    },
+    "leaderboard": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      },
+      ".indexOn": ["score"]
+    },
+    "daily_challenge": {
+      ".read": "auth != null",
+      ".write": false
+    }
+  }
+}

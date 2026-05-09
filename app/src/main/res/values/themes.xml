@@ -1,0 +1,13 @@
+<resources>
+    <style name="Theme.AICodingMentor" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#0F0F1A</item>
+        <item name="android:navigationBarColor">#1C1C2E</item>
+        <item name="android:windowBackground">#0F0F1A</item>
+    </style>
+
+    <style name="Theme.AICodingMentor.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#0F0F1A</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.AICodingMentor</item>
+    </style>
+</resources>

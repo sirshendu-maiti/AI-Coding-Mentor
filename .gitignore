@@ -1,0 +1,36 @@
+# ─── Secrets & Environment ────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ─── Firebase ─────────────────────────────────────────
+firebase-service-account.json
+firebase-debug.log
+firebase-debug.*.log
+.firebase/
+
+# ─── Android / Gradle ─────────────────────────────────
+local.properties
+*.hprof
+*.apk
+*.aab
+.gradle/
+build/
+app/build/
+*.iml
+
+# ─── IDE ──────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── Node ─────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ─── OS ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
