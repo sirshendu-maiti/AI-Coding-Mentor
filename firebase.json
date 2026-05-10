@@ -9,6 +9,14 @@
       "firebase-debug.*.log"
     ]
   },
+  "hosting": {
+    "public": "backend",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
   "database": {
     "rules": "database.rules.json"
   }
