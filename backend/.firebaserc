@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "aicodingmentor-f1077"
+  },
+  "targets": {
+    "aicodingmentor-f1077": {
+      "hosting": {
+        "backend": [
+          "aicodingmentor-f1077"
+        ]
+      }
+    }
+  }
+}
