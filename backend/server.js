@@ -5,9 +5,27 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
-const { globalRateLimiter } = require('./middleware/rateLimiter');
-const { formatErrorResponse, AppError } = require('./utils/errors');
-const { scheduleChallenge } = require('./services/dailyChallengeService');
+
+// ─── Load Middleware & Services ───────────────────────────────────────
+let globalRateLimiter;
+try {
+  const { globalRateLimiter: limiter } = require('./middleware/rateLimiter');
+  globalRateLimiter = limiter;
+} catch (err) {
+  console.warn('⚠️  Rate limiter initialization failed:', err.message);
+  globalRateLimiter = (req, res, next) => next();
+}
+
+let scheduleChallenge;
+try {
+  const { scheduleChallenge: schedule } = require('./services/dailyChallengeService');
+  scheduleChallenge = schedule;
+} catch (err) {
+  console.warn('⚠️  Daily challenge service failed:', err.message);
+  scheduleChallenge = () => {};
+}
+
+const { formatErrorResponse } = require('./utils/errors');
 
 // ─── Routes ──────────────────────────────────────────────────────────
 const aiRoutes = require('./routes/ai');
@@ -23,6 +41,8 @@ app.use(cors({
   origin: [
     'https://aicodingmentor-f1077.web.app',
     'https://aicodingmentor-f1077.firebaseapp.com',
+    'http://localhost:3000',
+    'http://localhost:5173'
   ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -53,12 +73,23 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// ─── Readiness Check ──────────────────────────────────────────────────
+app.get('/api/ready', (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      ready: true,
+      timestamp: new Date().toISOString()
+    }
+  });
+});
+
 // ─── API Routes ───────────────────────────────────────────────────────
 app.use('/api/ai', aiRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/data', dataRoutes);
 
-// ─── 404 Handler ──────────────────────────────────────────────────────
+// ─── 404 Handler ────────────��─────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -91,11 +122,17 @@ const server = app.listen(PORT, () => {
 ║   Running on port ${PORT}                       ║
 ║   Environment: ${process.env.NODE_ENV || 'development'}               ║
 ║   Health: http://localhost:${PORT}/api/health    ║
+║   Ready: http://localhost:${PORT}/api/ready      ║
 ╚═══════════════════════════════════════════════╝
   `);
 
-  // Start daily challenge scheduler
-  scheduleChallenge();
+  // Start daily challenge scheduler (with error handling)
+  try {
+    scheduleChallenge();
+    console.log('✅ Daily challenge scheduler started');
+  } catch (err) {
+    console.warn('⚠️  Challenge scheduler error:', err.message);
+  }
 });
 
 // ─── Graceful Shutdown ────────────────────────────────────────────────
