@@ -9,13 +9,13 @@ const { globalRateLimiter } = require('./middleware/rateLimiter');
 const { formatErrorResponse, AppError } = require('./utils/errors');
 const { scheduleChallenge } = require('./services/dailyChallengeService');
 
-// ─── Routes ────────────────────────────────────────────────────────────
+// ─── Routes ──────────────────────────────────────────────────────────
 const aiRoutes = require('./routes/ai');
 const userRoutes = require('./routes/user');
 const dataRoutes = require('./routes/data');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // ─── Security & Parsing ───────────────────────────────────────────────
 app.use(helmet());
